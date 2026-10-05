@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>新規登録</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+
+<body>
+  <header class="header"> 
+    <p class="header-logo">My Portfolio</p> 
+    <button class="login-button" type="button"> ログイン </button> 
+  </header>
+
+  <main class="main">
+    <h1 class="page-title">新規登録</h1>
+
+    <form class="register-form" th:action="@{/users/register}" th:object="${userRegisterForm}" method="post">
+
+    <div class="form-group">
+      <label class="form-label" for="name">氏名</label>
+      <input class="form-input" type="text" id="name" th:field="*{name}">
+      <p class="error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></p>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="email">メールアドレス</label>
+      <input class="form-input" type="email" id="email" th:field="*{email}">
+      <p class="error" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></p>
+      </div>
+
+    <div class="form-group">
+      <label class="form-label" for="password">パスワード</label>
+      <input class="form-input" type="password" id="password" th:field="*{password}">
+      <p class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
+    </div>
+
+    <button class="register-button" type="submit">登録する</button>
+  </form>
+</main>
+
+<footer class="footer">
+  <p class="footer-text">portfolio site</p>
+</footer>
+
+</body>
+</html>
