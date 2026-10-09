@@ -7,15 +7,12 @@
 </head>
 
 <body>
-  <header class="header"> 
-    <p class="header-logo">My Portfolio</p> 
-    <button class="login-button" type="button"> ログイン </button> 
-  </header>
+  <header th:replace="~{fragments/header :: header(true)}"></header>
 
   <main class="main">
     <h1 class="page-title">新規登録</h1>
 
-    <form class="register-form" th:action="@{/users/register}" th:object="${userRegisterForm}" method="post">
+    <form class="form" th:action="@{/users/register}" th:object="${userRegisterForm}" method="post">
 
     <div class="form-group">
       <label class="form-label" for="name">氏名</label>
@@ -35,13 +32,11 @@
       <p class="error" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>
     </div>
 
-    <button class="register-button" type="submit">登録する</button>
-  </form>
-</main>
+    <button class="form-button" type="submit">登録する</button>
+    </form>
+  </main>
 
-<footer class="footer">
-  <p class="footer-text">portfolio site</p>
-</footer>
+  <footer th:replace="~{fragments/footer :: footer}"></footer>
 
 </body>
 </html>

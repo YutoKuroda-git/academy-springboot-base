@@ -11,23 +11,34 @@ import java.time.LocalDateTime;
 @Service
 @RequiredArgsConstructor
 public class UserService {
-
-    private final UserMapper userMapper;
-    private final PasswordEncoder passwordEncoder;
-
-    public void register(UserRegisterForm form) {
-
-        User user = new User();
-
-        user.setName(form.getName());
-        user.setEmail(form.getEmail());
-
-        String hashedPassword = passwordEncoder.encode(form.getPassword());
-        user.setPassword(hashedPassword);
-
-        user.setCreatedAt(LocalDateTime.now());
-        user.setUpdatedAt(LocalDateTime.now());
-
-        userMapper.insert(user);
+  
+  private final UserMapper userMapper;
+  private final PasswordEncoder passwordEncoder;
+  
+  public void register(UserRegisterForm form) {
+    
+    User user = new User();
+    
+    user.setName(form.getName());
+    user.setEmail(form.getEmail());
+    
+    String hashedPassword = passwordEncoder.encode(form.getPassword());
+    user.setPassword(hashedPassword);
+    
+    user.setCreatedAt(LocalDateTime.now());
+    user.setUpdatedAt(LocalDateTime.now());
+    
+    userMapper.insert(user);
+  }
+  
+  public boolean login(String email, String password) {
+    
+    User user = userMapper.findByEmail(email);
+    
+    if (user == null) {
+      return false;
     }
+    
+    return passwordEncoder.matches(password, user.getPassword());
+  }
 }

@@ -6,6 +6,7 @@ body {
   flex-direction: column;
 }
 
+/* Header */
 .header {
   width: 100%;
   height: 120px;
@@ -17,6 +18,10 @@ body {
   box-sizing: border-box;
 }
 
+.header--center {
+  justify-content: center;
+}
+
 .header-logo { 
   margin: 0;
   font-weight: 700;
@@ -25,7 +30,7 @@ body {
   color: #fff;
 }
 
-.login-button { 
+.header-button { 
   width: 152px;
   height: 53px;
   padding: 0;
@@ -33,10 +38,16 @@ body {
   border-radius: 4px;
   box-sizing: border-box;
   background-color: #fff;
+  color: black;
   font-size: 16px;
   cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+/* Main */
 .main { 
   flex: 1;
   width: 100%; 
@@ -53,7 +64,8 @@ body {
   line-height: 133%; 
 }
 
-.register-form { 
+/* Form */
+.form { 
   width: 480px; 
   margin: 0 auto; 
   display: flex; 
@@ -91,7 +103,12 @@ body {
   font-size: 12px;
 }
 
-.register-button { 
+.error--center {
+  margin: 0;
+  text-align: center;
+}
+
+.form-button { 
   width: 232px;
   height: 53px; 
   padding: 0; 
@@ -103,8 +120,31 @@ body {
   color: #fff;
   font-size: 16px;
   cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+.form-button--wide { 
+  width: 268px;
+  height: 53px; 
+  padding: 0; 
+  border: none; 
+  border-radius: 4px; 
+  box-sizing: border-box; 
+  align-self: center;
+  background: #1B5678;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Footer */
 .footer { 
   width: 100%; 
   height: 40px; 
