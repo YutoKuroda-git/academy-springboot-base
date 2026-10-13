@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import jakarta.servlet.http.HttpSession;
 
 @Controller
 @RequiredArgsConstructor
@@ -35,9 +36,11 @@ public class UserController {
   public String login(
     @RequestParam String email,
     @RequestParam String password,
-    RedirectAttributes redirectAttributes) {
+    RedirectAttributes redirectAttributes,
+    HttpSession session) {
 
     if (userService.login(email, password)) {
+      session.setAttribute("loggedIn", true);
       return "redirect:/top";
     }
 
@@ -46,6 +49,12 @@ public class UserController {
       "メールアドレス、もしくはパスワードが間違っています"
     );
 
+    return "redirect:/users/login";
+  }
+
+  @PostMapping("/users/logout")
+  public String logout(HttpSession session) {
+    session.invalidate();
     return "redirect:/users/login";
   }
 

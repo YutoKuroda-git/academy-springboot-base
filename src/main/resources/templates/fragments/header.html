@@ -3,11 +3,20 @@
 <body>
   
   <header class="header"
-    th:fragment="header(showLogin)"
-    th:classappend="${!showLogin} ? 'header--center'">
+    th:fragment="header(pageType)"
+    th:classappend="${pageType == 'login'} ? 'header--center'">
     <p class="header-logo">My Portfolio</p>
-    <a class="header-button" th:if="${showLogin}" th:href="@{/users/login}">ログイン</a>
-  </header>
 
+    <a class="header-button" 
+      th:if="${pageType == 'register'}"
+      th:href="@{/users/login}">ログイン
+    </a>
+    
+    <form th:if="${pageType == 'top'}"
+      th:action="@{/users/logout}"
+      method="post">
+      <button class="header-button" type="submit">ログアウト</button>
+    </form>
+  </header>
   </body>
 </html>
