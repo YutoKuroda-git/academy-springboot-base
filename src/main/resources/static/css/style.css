@@ -18,7 +18,7 @@ body {
   box-sizing: border-box;
 }
 
-.header--center {
+.header--login {
   justify-content: center;
 }
 
@@ -45,6 +45,10 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.header--top .header-button {
+  width: 170px;
 }
 
 /* Main */
