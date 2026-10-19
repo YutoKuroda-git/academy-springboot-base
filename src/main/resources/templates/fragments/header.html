@@ -4,7 +4,7 @@
   
   <header class="header"
     th:fragment="header(pageType)"
-    th:classappend="${pageType == 'login'} ? 'header--center'">
+    th:classappend="|header--${pageType}|">
     <p class="header-logo">My Portfolio</p>
 
     <a class="header-button" 
