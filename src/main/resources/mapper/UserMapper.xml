@@ -31,11 +31,25 @@
             name,
             email,
             password,
-            self_introduction,
-            avatar_image,
-            created_at,
-            updated_at
+            self_introduction AS selfIntroduction,
+            avatar_image AS avatarImage,
+            created_at AS createdAt,
+            updated_at AS updatedAt
         FROM users
         WHERE email = #{email}
+    </select>
+
+    <select id="findById" resultType="com.spring.entity.User">
+        SELECT
+            id,
+            name,
+            email,
+            password,
+            self_introduction AS selfIntroduction,
+            avatar_image AS avatarImage,
+            created_at AS createdAt,
+            updated_at AS updatedAt
+        FROM users
+        WHERE id = #{id}
     </select>
 </mapper>
