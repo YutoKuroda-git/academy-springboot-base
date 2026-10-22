@@ -31,14 +31,18 @@ public class UserService {
     userMapper.insert(user);
   }
   
-  public boolean login(String email, String password) {
+  public User login(String email, String password) {
     
     User user = userMapper.findByEmail(email);
     
     if (user == null) {
-      return false;
+      return null;
     }
-    
-    return passwordEncoder.matches(password, user.getPassword());
+
+    if (!passwordEncoder.matches(password, user.getPassword())) {
+      return null;
+    }
+
+    return user;
   }
 }

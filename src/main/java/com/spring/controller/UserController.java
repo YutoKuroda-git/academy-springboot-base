@@ -1,5 +1,6 @@
 package com.spring.controller;
 
+import com.spring.entity.User;
 import com.spring.form.UserRegisterForm;
 import com.spring.service.UserService;
 import jakarta.validation.Valid;
@@ -39,8 +40,11 @@ public class UserController {
     RedirectAttributes redirectAttributes,
     HttpSession session) {
 
-    if (userService.login(email, password)) {
+    User user = userService.login(email, password);
+
+    if (user != null) {
       session.setAttribute("loggedIn", true);
+      session.setAttribute("userId", user.getId());
       return "redirect:/top";
     }
 

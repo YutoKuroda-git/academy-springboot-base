@@ -10,6 +10,37 @@
   <header th:replace="~{fragments/header :: header('top')}"></header>
 
   <main class="main">
+    <section class="profile">
+      <div class="profile-left">
+        <div class="profile-image">
+          <img
+            th:if="${user.avatarImage != null and !user.avatarImage.isEmpty()}"
+            th:src="@{${user.avatarImage}}"
+            alt="プロフィール画像">
+          <div
+            th:unless="${user.avatarImage != null and !user.avatarImage.isEmpty()}"
+            class="profile-image-placeholder">
+          </div>
+        </div>
+        <p class="profile-name" th:text="${user.name}">ユーザー名</p>
+      </div>
+
+      <div class="profile-content">
+        <h3>自己紹介</h3>
+        <p
+          th:if="${user.selfIntroduction != null and !user.selfIntroduction.isEmpty()}"
+          th:text="${user.selfIntroduction}">
+          自己紹介
+        </p>
+        <p th:unless="${user.selfIntroduction != null and !user.selfIntroduction.isEmpty()}"></p>
+        <a class="btn self-introduction-edit" href="#">自己紹介を編集する</a>
+      </div>
+    </section>
+
+    <section class="chart-section">
+      <h3 class="chart-title">学習チャート</h3>
+      <a class="btn btn-edit" href="#">編集する</a>
+    </section>
   </main>
 
   <footer th:replace="~{fragments/footer :: footer}"></footer>
