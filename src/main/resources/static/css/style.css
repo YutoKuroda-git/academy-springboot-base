@@ -207,6 +207,7 @@ body {
 .profile-name {
   font-size: 20px;
   font-weight: 400;
+  overflow-wrap: anywhere;
 }
 
 .profile-content {
@@ -215,8 +216,9 @@ body {
 }
 
 .profile-content h3 {
-  display: inline-block;
-  width: 50%;
+  display: block;
+  width: 242px;
+  white-space: nowrap;
   color: #000000BF;
   font-size: 36px;
   font-weight: 700;
@@ -226,6 +228,7 @@ body {
 .profile-content p {
   font-size: 18px;
   font-weight: 400;
+  overflow-wrap: anywhere;
 }
 
 .self-introduction-edit {
