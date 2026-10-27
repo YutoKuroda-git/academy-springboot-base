@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ja" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>プロフィール編集</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+  <header th:replace="~{fragments/header :: header('top')}"></header>
+
+  <main class="main">
+    <h1 class="page-title">自己紹介を編集する</h1>
+
+    <form 
+      class="form"
+      th:action="@{/users/profile/edit}"
+      method="post"
+      enctype="multipart/form-data">
+
+      <div class="form-group">
+        <label class="form-label" for="selfIntroduction">自己紹介文</label>
+        <textarea
+          class="form-textarea"
+          id="selfIntroduction"
+          name="selfIntroduction"
+          th:text="${user.selfIntroduction}"></textarea>
+
+        <p 
+          class="error"
+          th:if="${errorMessage != null}"
+          th:text="${errorMessage}"></p>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="avatarImage">アバター画像</label>
+        <label class="file-button" for="avatarImage">画像ファイルを添付する</label>
+        <input
+          class="file-input"
+          type="file"
+          id="avatarImage"
+          name="avatarImage"
+          accept="image/*">
+        <p class="file-name" id="fileName"></p>
+        <p 
+          class="error"
+          th:if="${avatarErrorMessage != null}"
+          th:text="${avatarErrorMessage}"></p>
+      </div>
+
+      <button class="form-button form-button--profile" type="submit">自己紹介を確定する</button>
+    </form>
+  </main>
+
+    <footer th:replace="~{fragments/footer :: footer}"></footer>
+
+    <script>
+      const imageInput = document.getElementById('avatarImage');
+      const fileName = document.getElementById('fileName');
+
+      imageInput.addEventListener('change', function () {
+        fileName.textContent = this.files.length > 0 ? this.files[0].name : '';
+      });
+    </script>
+</body>
+</html>
