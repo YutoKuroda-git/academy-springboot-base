@@ -1,55 +1,71 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper
-        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
-        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.spring.mapper.UserMapper">
-    <insert id="insert">
-        INSERT INTO users (
-            name,
-            email,
-            password,
-            self_introduction,
-            avatar_image,
-            created_at,
-            updated_at
-        )
-        VALUES (
-            #{name},
-            #{email},
-            #{password},
-            #{selfIntroduction},
-            #{avatarImage},
-            #{createdAt},
-            #{updatedAt}
-        )
-    </insert>
+  <insert id="insert">
+    INSERT INTO users (
+      name,
+      email,
+      password,
+      self_introduction,
+      avatar_image,
+      created_at,
+      updated_at
+    )
+    VALUES (
+      #{name},
+      #{email},
+      #{password},
+      #{selfIntroduction},
+      #{avatarImage},
+      #{createdAt},
+      #{updatedAt}
+    )
+  </insert>
 
-    <select id="findByEmail" resultType="com.spring.entity.User">
-        SELECT
-            id,
-            name,
-            email,
-            password,
-            self_introduction AS selfIntroduction,
-            avatar_image AS avatarImage,
-            created_at AS createdAt,
-            updated_at AS updatedAt
-        FROM users
-        WHERE email = #{email}
-    </select>
+  <select id="findByEmail" resultType="com.spring.entity.User">
+    SELECT
+      id,
+      name,
+      email,
+      password,
+      self_introduction AS selfIntroduction,
+      avatar_image AS avatarImage,
+      created_at AS createdAt,
+      updated_at AS updatedAt
+    FROM users
+    WHERE email = #{email}
+  </select>
 
-    <select id="findById" resultType="com.spring.entity.User">
-        SELECT
-            id,
-            name,
-            email,
-            password,
-            self_introduction AS selfIntroduction,
-            avatar_image AS avatarImage,
-            created_at AS createdAt,
-            updated_at AS updatedAt
-        FROM users
-        WHERE id = #{id}
-    </select>
+  <select id="findById" resultType="com.spring.entity.User">
+    SELECT
+      id,
+      name,
+      email,
+      password,
+      self_introduction AS selfIntroduction,
+      avatar_image AS avatarImage,
+      created_at AS createdAt,
+      updated_at AS updatedAt
+    FROM users
+    WHERE id = #{id}
+  </select>
+
+  <update id="updateSelfIntroduction">
+    UPDATE users
+    SET
+      self_introduction = #{selfIntroduction},
+      updated_at = CURRENT_TIMESTAMP
+    WHERE id = #{id}
+  </update>
+
+  <update id="updateAvatarImage">
+    UPDATE users
+    SET
+      avatar_image = #{avatarImage},
+      updated_at = CURRENT_TIMESTAMP
+    WHERE id = #{id}
+  </update>
 </mapper>

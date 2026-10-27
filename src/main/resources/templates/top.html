@@ -32,8 +32,8 @@
           th:text="${user.selfIntroduction}">
           自己紹介
         </p>
-        <p th:unless="${user.selfIntroduction != null and !user.selfIntroduction.isEmpty()}"></p>
-        <a class="btn self-introduction-edit" href="#">自己紹介を編集する</a>
+        <p th:unless="${user.selfIntroduction != null and !user.selfIntroduction.isEmpty()}">自己紹介が設定されていません。</p>
+        <a class="btn self-introduction-edit" th:href="@{/users/profile/edit}">自己紹介を編集する</a>
       </div>
     </section>
 
