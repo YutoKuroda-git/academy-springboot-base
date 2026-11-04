@@ -12,7 +12,7 @@
       th:href="@{/users/login}">ログイン
     </a>
     
-    <form th:if="${pageType == 'top'}"
+    <form th:if="${pageType == 'top' or pageType == 'items'}"
       th:action="@{/users/logout}"
       method="post">
       <button class="header-button" type="submit">ログアウト</button>
