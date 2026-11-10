@@ -28,4 +28,10 @@
       AND l.learning_month = #{month}
     ORDER BY c.id, l.id
   </select>
+
+  <select id="findById" resultType="com.spring.entity.Category">
+    SELECT id, name
+    FROM categories
+    WHERE id = #{id}
+  </select>
 </mapper>

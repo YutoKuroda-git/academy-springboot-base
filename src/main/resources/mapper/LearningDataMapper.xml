@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.spring.mapper.LearningDataMapper">
+  <select id="countByItemName" resultType="int">
+    SELECT COUNT(*)
+    FROM learning_data
+    WHERE user_id = #{userId}
+      AND learning_month = #{month}
+      AND item_name = #{itemName}
+  </select>
+
+  <insert id="insert">
+    INSERT INTO learning_data (
+      user_id,
+      category_id,
+      item_name,
+      learning_time,
+      learning_month,
+      created_at,
+      updated_at
+    )
+    VALUES (
+      #{userId},
+      #{categoryId},
+      #{itemName},
+      #{learningTime},
+      #{learningMonth},
+      CURRENT_TIMESTAMP,
+      CURRENT_TIMESTAMP
+    )
+  </insert>
+</mapper>

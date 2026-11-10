@@ -24,7 +24,7 @@
       <section class="category-card" th:each="category : ${categories}">
         <div class="category-header">
           <h2 class="category-title" th:text="${category.name}">カテゴリ</h2>
-          <button type="button" class="btn-add">項目を追加する</button>
+          <a class="btn-add" th:href="@{/skills/new(categoryId=${category.id},month=${selectedMonth})}">項目を追加する</a>
         </div>
         
         <div class="item-card">
