@@ -12,4 +12,6 @@ public interface CategoryMapper {
     @Param("userId") Long userId,
     @Param("month") Integer month
   );
+
+  Category findById(@Param("id") Long id);
 }
