@@ -429,18 +429,107 @@ body {
 
 .item-table {
   width: 100%;
+  table-layout: fixed;
   border-collapse: collapse;
-  font-size: 12px;
+  font-size: 14px;
 }
 
 .item-table th,
 .item-table td {
-  padding: 12px 8px;
+  box-sizing: border-box;
+  padding: 0;
   text-align: left;
   border-bottom: 1px solid #e0e0e0;
 }
 
-/*  */
+.item-table th:nth-child(1),
+.item-table td:nth-child(1) {
+  width: 240px;
+  padding-left: 40px;
+}
+
+.item-table th:nth-child(2),
+.item-table td:nth-child(2) {
+  width: 240px;
+}
+
+.item-table th:nth-child(3),
+.item-table td:nth-child(3) {
+  width: 200px;
+}
+
+.item-table th:nth-child(4),
+.item-table td:nth-child(4) {
+  width: 200px;
+  padding-right: 0;
+}
+
+.item-table th {
+  height: 56px;
+  font-weight: 500;
+  color: #000000DE;
+}
+
+.item-table td {
+  height: 73px;
+  color: #000000DE;
+}
+
+.item-time-input {
+  width: 160px;
+  height: 40px;
+  padding: 0 8px 0 12px;
+  border: 1px solid #0000003B;
+  border-radius: 4px;
+  background: #fff;
+  color: #0000008A;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.item-time-input::-webkit-inner-spin-button,
+.item-time-input::-webkit-outer-spin-button {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.btn-save {
+  width: 158px;
+  height: 32px;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #1B5678;
+  border-radius: 4px;
+  background: #fff;
+  color: #1B5678;
+  font-size: 14px;
+  white-space: nowrap;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+.btn-delete {
+  width: 88px;
+  height: 32px;
+  margin: 0 auto;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 4px;
+  background: #EE6969;
+  color: #fff;
+  font-size: 14px;
+  white-space: nowrap;
+  box-sizing: border-box;
+  cursor: pointer;
+}
+
+/* Skills */
 .modal {
   position: fixed;
   inset: 0;

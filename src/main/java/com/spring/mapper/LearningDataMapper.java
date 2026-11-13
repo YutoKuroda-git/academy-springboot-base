@@ -13,4 +13,15 @@ public interface LearningDataMapper {
   );
 
   void insert(LearningData learningData);
+
+  LearningData findByIdAndUserId(
+    @Param("id") Long id,
+    @Param("userId") Long userId
+  );
+
+  void updateLearningTime(
+    @Param("id") Long id,
+    @Param("userId") Long userId,
+    @Param("learningTime") Integer learningTime
+  );
 }
