@@ -25,4 +25,14 @@ public class LearningDataService {
     data.setLearningMonth(form.getMonth());
     learningDataMapper.insert(data);
   }
+
+  public LearningData updateLearningTime(Long userId, Long id, Integer learningTime) {
+    LearningData data = learningDataMapper.findByIdAndUserId(id, userId);
+    if (data == null) {
+      return null;
+    }
+    learningDataMapper.updateLearningTime(id, userId, learningTime);
+    data.setLearningTime(learningTime);
+    return data;
+  }
 }

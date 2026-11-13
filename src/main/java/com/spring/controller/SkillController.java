@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.spring.entity.LearningData;
+import com.spring.form.LearningTimeEditForm;
+import org.springframework.web.bind.annotation.PathVariable;
+
 import java.time.YearMonth;
 import java.util.List;
 
@@ -159,5 +163,44 @@ public class SkillController {
     } catch (NumberFormatException e) {
       return fallback;
     }
+  }
+
+  @PostMapping("/skills/{id}/edit")
+  public String edit(
+    @PathVariable Long id,
+    @Valid @ModelAttribute LearningTimeEditForm form,
+    BindingResult result,
+    HttpSession session,
+    RedirectAttributes redirectAttributes) {
+
+    Long userId = getLoginUserId(session);
+    if (userId == null) {
+      return "redirect:/users/login";
+    }
+
+    // 戻り先の月(範囲外なら当月)
+    List<Integer> months = availableMonths();
+    int month = (form.getMonth() != null && months.contains(form.getMonth()))
+      ? form.getMonth()
+      : months.get(0);
+    redirectAttributes.addAttribute("month", month);
+
+    if (result.hasFieldErrors("learningTime")) {
+      redirectAttributes.addFlashAttribute("errorItemId", id);
+      redirectAttributes.addFlashAttribute(
+        "errorMessage", result.getFieldError("learningTime").getDefaultMessage());
+      redirectAttributes.addFlashAttribute("errorValue", form.getLearningTime());
+      return "redirect:/skills";
+    }
+
+    LearningData updated = learningDataService.updateLearningTime(
+      userId, id, Integer.parseInt(form.getLearningTime()));
+
+    if (updated != null) {
+      redirectAttributes.addFlashAttribute("editSuccess", true);
+      redirectAttributes.addFlashAttribute("editedItemName", updated.getItemName());
+      redirectAttributes.addFlashAttribute("editedLearningTime", updated.getLearningTime());
+    }
+    return "redirect:/skills";
   }
 }

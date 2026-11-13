@@ -39,7 +39,27 @@
             </thead>
             <tbody>
               <tr th:each="item : ${category.learningDataList}">
-                <td th:text="${item.itemName}">項目名</td>
+                <td>
+                  <form th:id="|edit-form-${item.id}|"
+                        th:action="@{/skills/{id}/edit(id=${item.id})}"
+                        method="post"></form>
+                  <input type="hidden" name="month" th:value="${selectedMonth}"
+                        th:form="|edit-form-${item.id}|">
+                  <span th:text="${item.itemName}">項目名</span>
+                </td>
+                <td>
+                  <input class="item-time-input" type="number"
+                        name="learningTime"
+                        th:form="|edit-form-${item.id}|"
+                        th:value="${errorItemId == item.id ? errorValue : (item.learningTime ?: 0)}"
+                        min="0">
+                  <p class="error" th:if="${errorItemId == item.id}" th:text="${errorMessage}"></p>
+                </td>
+                <td>
+                  <button type="submit" class="btn-save"
+                          th:form="|edit-form-${item.id}|">学習時間を保存する</button>
+                </td>
+                <td><button type="button" class="btn-delete">削除する</button></td>
               </tr>
             </tbody>
           </table>
@@ -48,6 +68,15 @@
       
     </div>
   </main>
+
+  <div class="modal" th:if="${editSuccess}">
+    <div class="modal-content">
+      <p class="modal-text">
+        <span th:text="|${editedItemName}の学習時間を保存しました！|"></span>
+      </p>
+      <a class="form-button" th:href="@{/skills(month=${selectedMonth})}">編集ページに戻る</a>
+    </div>
+  </div>
   
   <footer th:replace="~{fragments/footer :: footer}"></footer>
 </body>
