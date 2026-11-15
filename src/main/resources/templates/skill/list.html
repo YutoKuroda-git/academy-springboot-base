@@ -43,8 +43,15 @@
                   <form th:id="|edit-form-${item.id}|"
                         th:action="@{/skills/{id}/edit(id=${item.id})}"
                         method="post"></form>
+                  <form th:id="|delete-form-${item.id}|"
+                        th:action="@{/skills/{id}/delete(id=${item.id})}"
+                        method="post"></form>
+
                   <input type="hidden" name="month" th:value="${selectedMonth}"
                         th:form="|edit-form-${item.id}|">
+                  <input type="hidden" name="month" th:value="${selectedMonth}"
+                        th:form="|delete-form-${item.id}|">
+         
                   <span th:text="${item.itemName}">項目名</span>
                 </td>
                 <td>
@@ -59,7 +66,7 @@
                   <button type="submit" class="btn-save"
                           th:form="|edit-form-${item.id}|">学習時間を保存する</button>
                 </td>
-                <td><button type="button" class="btn-delete">削除する</button></td>
+                <td><button type="submit" class="btn-delete" th:form="|delete-form-${item.id}|">削除する</button></td>
               </tr>
             </tbody>
           </table>
@@ -73,6 +80,15 @@
     <div class="modal-content">
       <p class="modal-text">
         <span th:text="|${editedItemName}の学習時間を保存しました！|"></span>
+      </p>
+      <a class="form-button" th:href="@{/skills(month=${selectedMonth})}">編集ページに戻る</a>
+    </div>
+  </div>
+
+  <div class="modal" th:if="${deleteSuccess}">
+    <div class="modal-content">
+      <p class="modal-text">
+        <span th:text="|${deletedItemName}を削除しました！|"></span>
       </p>
       <a class="form-button" th:href="@{/skills(month=${selectedMonth})}">編集ページに戻る</a>
     </div>
