@@ -133,7 +133,6 @@ public class SkillController {
     return "redirect:/skills/new";
   }
 
-  // ログイン中のユーザーIDを返す(未ログインなら null)
   private Long getLoginUserId(HttpSession session) {
     if (!Boolean.TRUE.equals(session.getAttribute("loggedIn"))) {
       return null;
@@ -145,7 +144,6 @@ public class SkillController {
     return userId;
   }
 
-  // 当月を含む過去3ヶ月(例: 11, 10, 9 / 1月なら 1, 12, 11)
   private List<Integer> availableMonths() {
     YearMonth now = YearMonth.now();
     return List.of(
@@ -178,7 +176,6 @@ public class SkillController {
       return "redirect:/users/login";
     }
 
-    // 戻り先の月(範囲外なら当月)
     List<Integer> months = availableMonths();
     int month = (form.getMonth() != null && months.contains(form.getMonth()))
       ? form.getMonth()
@@ -200,6 +197,34 @@ public class SkillController {
       redirectAttributes.addFlashAttribute("editSuccess", true);
       redirectAttributes.addFlashAttribute("editedItemName", updated.getItemName());
       redirectAttributes.addFlashAttribute("editedLearningTime", updated.getLearningTime());
+    }
+    return "redirect:/skills";
+  }
+
+  @PostMapping("/skills/{id}/delete")
+  public String delete(
+    @PathVariable Long id,
+    @RequestParam(required = false) String month,
+    HttpSession session,
+    RedirectAttributes redirectAttributes) {
+
+    Long userId = getLoginUserId(session);
+    if (userId == null) {
+      return "redirect:/users/login";
+    }
+
+    List<Integer> months = availableMonths();
+    int selectedMonth = parseMonth(month, months.get(0));
+    if (!months.contains(selectedMonth)) {
+      selectedMonth = months.get(0);
+    }
+    redirectAttributes.addAttribute("month", selectedMonth);
+
+    LearningData deleted = learningDataService.delete(userId, id);
+
+    if (deleted != null) {
+      redirectAttributes.addFlashAttribute("deleteSuccess", true);
+      redirectAttributes.addFlashAttribute("deletedItemName", deleted.getItemName());
     }
     return "redirect:/skills";
   }

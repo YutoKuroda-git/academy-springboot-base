@@ -35,4 +35,13 @@ public class LearningDataService {
     data.setLearningTime(learningTime);
     return data;
   }
+
+  public LearningData delete(Long userId, Long id) {
+    LearningData data = learningDataMapper.findByIdAndUserId(id, userId);
+    if (data == null) {
+      return null;
+    }
+    learningDataMapper.deleteByIdAndUserId(id, userId);
+    return data;
+  }
 }

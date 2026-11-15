@@ -24,4 +24,9 @@ public interface LearningDataMapper {
     @Param("userId") Long userId,
     @Param("learningTime") Integer learningTime
   );
+
+  void deleteByIdAndUserId(
+    @Param("id") Long id,
+    @Param("userId") Long userId
+  );
 }
